@@ -1,0 +1,11 @@
+select min(c2), avg(c2), sum(Aa+Ab+Ba) from (select T1.a as Aa, T1.b as Ab, T2.a
+as Ba, c1, c2, T1.a+T2.b as x from T1 left join T2 on T1.c1 = T2.a) X group by x;
+
+select * from (select min(c2) as p1, avg(c2) as p2,
+sum(Aa+Ab+Ba) as p3 from (select T1.a as Aa, T1.b as Ab, T2.a as
+Ba, c1, c2, T1.a+T2.b as x from T1 left join T2 on T1.c1 = T2.a) X group
+by x) P where p1=p2 and p2=p3;
+
+select avg(X.Bb) from (select T1.a as Aa, T1.b as Ab, T2.a as Ba, T2.b as Bb, c1, c2,
+T1.a+T2.b as x from T1 right join T2 on T1.b = T2.a) X left join T1 on
+((2*T1.a+X.c2)/2)>(2*T1.c1) group by T1.c1;
